@@ -82,12 +82,18 @@ Assuming we will have one file per month for each dataset.
 4. run python create_tables.py (To create staging and dimension tables on AWS Redshift Cluster)
 5. run python etl.py (To load data into dimension and fact tables.)
 
+ETL Data pipeline execution using Python
+![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/cmd_execution.JPG "cmd Execution")
+
 #### Using Airflow
 1. Login into AWS and connect to RedShift database.
 2. Execute DDL SQL statement manually for one time to create the staging and dimension tables.[link](https://github.com/SG453/data-engineer_projects/tree/main/Data%20Modeling%20On%20eCommerce%20Dataset/Using%20Airflow/Airflow)
 3. Execute Dummy insert record SQL statements into product dimension and brand dimension to avoid is null queries on our data model.
 4. Open Airflow and set up connections for AWS S3 and redshift database.[link](https://github.com/SG453/data-engineer_projects/tree/main/Data%20Modeling%20On%20eCommerce%20Dataset/Using%20Airflow)
 5. On the DAG and Trigger it manually to load data into Dimension and Fact tables.
+
+ETL Data pipelines using Airflow
+![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/airflow_dag_graph.JPG "Airflow DAG")
 
 ## Data Quality Checks
 We will perform the following data quality checks on the data and they will be the part of my ETL data pipeline. 
