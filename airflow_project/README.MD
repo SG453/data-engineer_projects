@@ -12,7 +12,7 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 The Scope of this project is to analyze the source data and create a data model on AWS RedShift and build ETL Data pipelines using Apache Airflow. We may have to create our own Operators as part of this project.
 
 ### Data Description
-We have received song and log event files in the form of JSON format from Sparkify. They are stored in AWS S3 Bucket.[link](https://s3.console.aws.amazon.com/s3/buckets/udacity-dend?region=us-west-2&tab=objects)
+We have received song and log event files in the form of JSON format from Sparkify. They are stored in AWS S3 Bucket [link](https://s3.console.aws.amazon.com/s3/buckets/udacity-dend?region=us-west-2&tab=objects)
 
 
 ## Data Model
