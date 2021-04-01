@@ -2,7 +2,7 @@
 
 ## Project Goal
 ________________________________
-The goal of this project is to help **Sparkify** data analysts and data scientists by providing a Data Warehouse (Star schema) solution on AWS S3. Dimension and Fact tables are provided in the form of Parquet files on AWS S3 bucket. So that, Sparkify users use these output files and extract any meaningful insights with the help of AWS **Schema on read feature.**
+The goal of this project is to help **Sparkify** (Online music streaming app) data analysts and data scientists by providing a Data Warehouse (Star schema) solution on AWS S3. Dimension and Fact tables are provided in the form of Parquet files on AWS S3 bucket. So that, Sparkify users use these output files and extract any meaningful insights with the help of AWS **Schema on read feature.**
 
 ## Introduction
 _____________
