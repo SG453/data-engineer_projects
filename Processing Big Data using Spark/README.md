@@ -11,6 +11,10 @@ _____________
 * We then extract the required columns for our dimension and fact tables.
 * Finally, save the extracted data to AWS S3 bucket in the form of PARQUET files.
 
+## Data Description
+___________________
+We have received song and log event files in the form of JSON format from Sparkify. They are stored in AWS S3 Bucket.[link](https://s3.console.aws.amazon.com/s3/buckets/udacity-dend?region=us-west-2&tab=objects)
+
 ## Schema Design Justification
 ___________________________
 We can read the source schema for the log file and song data file after loading a single log and song file.
