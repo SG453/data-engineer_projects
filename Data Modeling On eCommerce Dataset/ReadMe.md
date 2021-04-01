@@ -117,3 +117,15 @@ Here is the [link](https://github.com/SG453/data-engineer_projects/blob/main/Dat
 #### Data performance
 --> We can create indexes on dimension and fact tables to improve the performance.  
 --> We can also create materialized views for the most executed queries to avoid pressure on our data model.
+
+## Sample Queries and Results  
+
+Top 5 Brands  
+![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/Top5_brands.JPG "Top 5 Brands")
+
+Product viewed the most but never Bought  
+![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/Viewed_But_Never_bought.JPG "Viewed but never bought")
+
+Top 5 most viewed products for Oct, 2019  
+![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/Top5_products_viewed.JPG "Most viewed for Oct,2019")
+
