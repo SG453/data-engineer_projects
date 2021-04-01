@@ -8,6 +8,11 @@ def load_staging_tables(cur, conn):
 	for query in load_staging_queries:
 		cur.execute(query)
 		conn.commit()
+		
+def cleanup_staging_tables(cur, conn):
+    for query in data_cleanup_queries:
+        cur.execute(query)
+        conn.commit()
 
 def data_quality_check(cur,conn):
     for query in dq_check_queries[:3]:
@@ -34,7 +39,6 @@ def move_processed_files(s3,bucket,source_prefix,target_prefix,file_format):
             s3.Object(bucket,k).delete()
 
 def main():
-
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
     KEY = config.get('AWS','KEY')
@@ -51,6 +55,10 @@ def main():
     # loading data into staging tables
     load_staging_tables(cur, conn)
     print('Staging Data Load Complete...!')
+	
+    # deleting null records
+    cleanup_staging_tables(cur, conn)
+    print('Data CleanUp from staging tables Complete...!')
     
     # data quality check part 1 to check if records exists in staging tables.
     data_quality_check(cur,conn)
