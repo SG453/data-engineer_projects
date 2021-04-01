@@ -2,7 +2,7 @@
 
 ## Project Goal
 ________________________________
-The goal of this project is to understand the source data (JSON files) and help **Sparkify** data analysts, data scientists by providing a data model consists of fact and dimension tables.  So that they can query against the given data model to extract any meaningful insights.
+The goal of this project is to understand the source data (JSON files) and help **Sparkify**(Online music streaming app) data analysts, data scientists by providing a data model consists of fact and dimension tables.  So that they can query against the given data model to extract any meaningful insights.
 
 ## Introduction
 _____________
