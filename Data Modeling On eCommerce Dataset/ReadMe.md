@@ -93,7 +93,7 @@ ETL Data pipeline execution using Python
 4. Open Airflow and set up connections for AWS S3 and redshift database.[link](https://github.com/SG453/data-engineer_projects/tree/main/Data%20Modeling%20On%20eCommerce%20Dataset/Using%20Airflow)
 5. On the DAG and Trigger it manually to load data into Dimension and Fact tables.
 
-ETL Data pipelines using Airflow
+ETL Data pipeline using Airflow
 ![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/airflow_dag_graph.JPG "Airflow DAG")
 
 ## Data Quality Checks
