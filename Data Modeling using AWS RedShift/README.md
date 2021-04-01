@@ -2,7 +2,7 @@
 
 ## Project Goal
 ________________________________
-The goal of this project is to help **Sparkify** data analysts and data scientists by providing a Data Warehouse (Star schema) solution on AWS Cloud using RedShift Database and s3 bucket (to read the source data). Sparkify users use this data model to query and extract any meaningful insights.
+The goal of this project is to help **Sparkify**(Online music streaming app) data analysts and data scientists by providing a Data Warehouse (Star schema) solution on AWS Cloud using RedShift Database and s3 bucket (to read the source data). Sparkify users use this data model to query and extract any meaningful insights.
 
 ## Introduction
 _____________
@@ -11,6 +11,10 @@ _____________
 * We use the COPY command to load source data from the s3 bucket into staging tables.
 * We create Dim and Fact tables by understanding the data from staging tables.
 * Finally, create data pipelines to load data from staging tables into Dim and Fact tables.
+
+## Data
+____________________
+We have received song and log event files in the form of JSON format from Sparkify. They are stored in AWS S3 Bucket [link](https://s3.console.aws.amazon.com/s3/buckets/udacity-dend?region=us-west-2&tab=objects)
 
 ## Schema Design Justification
 ___________________________
