@@ -104,6 +104,8 @@ from {}
 access_key_id '{}'
 secret_access_key '{}'
 CSV
+DELIMITER ','
+FILLRECORD
 IGNOREHEADER 1
 """).format(DAILY_DATA,KEY,SECRET)
 
@@ -113,6 +115,8 @@ from {}
 access_key_id '{}'
 secret_access_key '{}'
 CSV
+DELIMITER ','
+FILLRECORD
 IGNOREHEADER 1
 """).format(ELECTRONICS_DATA,KEY,SECRET)
 
@@ -122,6 +126,8 @@ from {}
 access_key_id '{}'
 secret_access_key '{}'
 CSV
+DELIMITER ','
+FILLRECORD
 IGNOREHEADER 1
 """).format(JEWELRY_DATA,KEY,SECRET)
 
@@ -346,10 +352,25 @@ select
         join dim_brand t3
         on t1.brand = t3.brand_name
         """)
+delete_from_staging_multi="""
+delete from staging_shopping_activity_multi
+where user_id is null or price is null
+"""
+
+delete_from_staging_electronics="""
+delete from staging_shopping_activity_electronics
+where user_id is null or price is null
+"""
+
+delete_from_staging_jewelry="""
+delete from staging_shopping_activity_jewelry
+where user_id is null or price is null
+"""
 
 # Query lists
 create_table_queries = [create_staging_multi,create_staging_electronics,create_staging_jewelry,create_dimProduct,create_dimBrand,create_dimTime,create_factShoppingActivity]
 load_staging_queries = [load_staging_data_multi,load_staging_data_electronics,load_staging_data_jewelry]
 load_all_queries = [insert_dummy_dimProduct,insert_dummy_brand,load_dimProduct,load_dimBrand,load_dimTime,load_factData]
 dq_check_queries = [dq_check1,dq_check2,dq_check3,dq_check4, dq_check5]
+data_cleanup_queries = [delete_from_staging_multi,delete_from_staging_electronics,delete_from_staging_jewelry]
 
