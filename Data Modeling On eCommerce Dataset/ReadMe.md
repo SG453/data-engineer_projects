@@ -97,7 +97,7 @@ ETL Data pipeline using Airflow
 ![alt text](https://github.com/SG453/data-engineer_projects/blob/main/Data%20Modeling%20On%20eCommerce%20Dataset/images/airflow_dag_graph.JPG "Airflow DAG")
 
 ## Data Quality Checks
-We will perform the following data quality checks on the data and they will be the part of my ETL data pipeline. 
+We will perform the following data quality checks on the data and they will be the part of this ETL data pipeline. 
 1. Check if data exists in source file. If data doesn't exists in any of the source files. Then we will force the pipeline to fail.
 2. Verify the record counts. The number of records we loaded in staging tables and the final load into fact table should match. (Note: Not counting any data duplicates in source file)
 
