@@ -43,7 +43,8 @@ Top 5 records from Jewelry dataset
 ### Data cleanup
 * **event_time:** It has a string value "UTC" in it. We can replace the 'UTC' value and convert the column to timestamp.
 * **category_code:** Multiple values are concatenated with '.'. We can split the value into multiple values and assign them to subcategories. NaN category_code values will be mapped to the 'Unknown' value in the product dimension table.
-* **price:** We will ignore any rows which don't contain a price value.
+* **price:** We will delete the rows with null price values.
+* **user_id:** We will delete the rows with null user_id values.
 * **brand:** NaN brand values will be mapped to 'UnKnown' value in the brand dimention table.
 
 ## Data Model
