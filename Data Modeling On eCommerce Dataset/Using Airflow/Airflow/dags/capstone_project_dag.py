@@ -19,11 +19,6 @@ We can use this dimension data model and perform some data analysis on online sh
 """
 
 def data_quality_check1(*args,**kwargs):
-    """
-    This function is used to check if records exists in source file. 
-    If the source file doesn't contain any records. It will raise an error.
-    It uses PostgresHook to connect to AWS redshift database and takes table name as parameter.
-    """
     table = kwargs['params']['table']
     redshift_hook = PostgresHook('redshift')
     records = redshift_hook.get_records(f'select count(1) from {table}')
@@ -45,6 +40,13 @@ def data_quality_check2():
     if r1_cnt != r2_cnt:
         raise ValueError('Record count doesn"t match. Check dq_query1 and dq_query2')
     logging.info('Data quality check2 passed')
+    
+def delete_from_staging(*args,**kwargs):
+    table = kwargs['params']['table']
+    redshift_hook = PostgresHook('redshift')
+    sql_stmt = (f'delete from {table} where user_id is null or price is null')
+    redshift_hook.run(sql_stmt)
+    logging.info(f'Deleted bad records from {table}')
     
 
 default_args = {
@@ -76,7 +78,7 @@ stage_multi_data_to_redshift = StageToRedshiftOperator(
     redshift_conn_id ='redshift',
     aws_credentials_id = 'aws_credentials',
     s3_bucket = 'udacity-capstone-ecommerce',
-    s3_key = "Sample_data/monthly/multi",
+    s3_key = "Source Data/multi",
     file_format = 'csv'
 )
                  
@@ -87,7 +89,7 @@ stage_electronics_data_to_redshift = StageToRedshiftOperator(
     redshift_conn_id ='redshift',
     aws_credentials_id = 'aws_credentials',
     s3_bucket = 'udacity-capstone-ecommerce',
-    s3_key = "Sample_data/monthly/electronics",
+    s3_key = "Source Data/electronics",
     file_format = 'csv'
 )
                  
@@ -98,8 +100,32 @@ stage_jewelry_data_to_redshift = StageToRedshiftOperator(
     redshift_conn_id ='redshift',
     aws_credentials_id = 'aws_credentials',
     s3_bucket = 'udacity-capstone-ecommerce',
-    s3_key = "Sample_data/monthly/jewelry",
+    s3_key = "Source Data/jewelry",
     file_format = 'csv'
+)
+
+cleanup_multi = PythonOperator(
+    task_id='cleanup_multi_stage_table',
+    dag=dag,
+    python_callable=delete_from_staging,
+    provide_context=True,
+    params={'table':'staging_shopping_activity_multi'}
+)
+
+cleanup_electronics = PythonOperator(
+    task_id='cleanup_electronics_stage_table',
+    dag=dag,
+    python_callable=delete_from_staging,
+    provide_context=True,
+    params={'table':'staging_shopping_activity_electronics'}
+)
+
+cleanup_jewelry = PythonOperator(
+    task_id='cleanup_jewelry_stage_table',
+    dag=dag,
+    python_callable=delete_from_staging,
+    provide_context=True,
+    params={'table':'staging_shopping_activity_jewelry'}
 )
 
 load_product_dimension_table = LoadDimensionOperator(
@@ -191,10 +217,13 @@ end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)
                  
 start_operator >> stage_multi_data_to_redshift
 start_operator >> stage_electronics_data_to_redshift
-start_operator >> stage_jewelry_data_to_redshift                
-stage_multi_data_to_redshift >> check_multi_data
-stage_electronics_data_to_redshift >> check_electronics_data
-stage_jewelry_data_to_redshift >> check_jewelry_data
+start_operator >> stage_jewelry_data_to_redshift  
+stage_multi_data_to_redshift >> cleanup_multi
+stage_electronics_data_to_redshift >> cleanup_electronics
+stage_jewelry_data_to_redshift >> cleanup_jewelry
+cleanup_multi >> check_multi_data
+cleanup_electronics >> check_electronics_data
+cleanup_jewelry >> check_jewelry_data
 check_multi_data >> load_product_dimension_table
 check_multi_data >> load_brand_dimension_table
 check_multi_data >> load_time_dimension_table
